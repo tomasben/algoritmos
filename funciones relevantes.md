@@ -1,16 +1,16 @@
-- Convertir carácteres en números
+- Convertir carácteres a números
 ```
 FUNCION convertir(car: caracter): entero ES
   SEGUN num HACER
-    "1": convertir := 1
-    "2": convertir := 2
-    "3": convertir := 3
-    "4": convertir := 4
-    "5": convertir := 5
-    "6": convertir := 6
-    "7": convertir := 7
-    "8": convertir := 8
-    "9": convertir := 9
+    '1': convertir := 1
+    '2': convertir := 2
+    '3': convertir := 3
+    '4': convertir := 4
+    '5': convertir := 5
+    '6': convertir := 6
+    '7': convertir := 7
+    '8': convertir := 8
+    '9': convertir := 9
   FIN_SEGUN
 FIN_FUNCIÓN
 ```

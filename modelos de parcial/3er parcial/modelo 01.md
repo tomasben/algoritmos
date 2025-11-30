@@ -1,0 +1,57 @@
+## Ejercicio 1
+Taylor Swift trajo The Eras Tour a Latinoamérica y pasó por Buenos Aires
+el 9, 10 y 11 de noviembre. Una gran cantidad de swifties hicieron fila en la
+entrada del estadio por 7 meses para asegurar un lugar cercano a la artista
+dentro del estadio.
+
+La comunidad de "Swifties Developers" desarrolló un sistema para enumerar los
+lugares en la fila, y posteriormente acceder de manera ordenada al estadio.
+Como tuvo tanto éxito, se quiere digitalizar dicho sistema para próximos
+recitales con tanta concurrencia. Se cuenta con la siguiente información:
+
+Una lista simple que contiene: DNI de la swiftie, número de la fila, fecha en
+la que se puso a hacer la fila y fecha para la que tiene entradas. Se decidió
+encriptar el número en la fila que le toca a cada una, código que, el día del
+recital, será desencriptado para poder acceder al estadio. Para el proceso de
+encriptación se debe realizar lo siguiente:
+
+- Recuperar el código de encriptación que se encuentra en una matriz de
+enteros, cuyas dimensiones son el mes en el que inició la fila y el día para el
+que tiene entradas.
+- Obtener el código de swiftie, para lo cual existe una función swiftieEncriptada(),
+que retorna dicho código y recibe como parámetro el número de fila y el código
+correspondiente de la matriz.
+
+Se pide:
+1. Cargar una lista doble que deberá tener un nodo por cada fecha del recital,
+en los cuales se registre la cantidad de asistentes, seguido por nodos con la
+información de las swifties que van en cada fecha (código y DNI).
+
+*Nota:* Los nodos que indican la fecha y cantidad de asistentes deben tener
+los campos código y DNI vacíos. Luego, los nodos con información de cada swiftie
+indican el código encriptado y el DNI, dejando vacíos los campos de fecha y
+cantidad. Una vez que se cargó a la swiftie en la lista doble, se la debe eliminar
+de la lista de entrada.
+2. Informar la fecha con la mayor cantidad de swifties.
+
+Ejemplo de la lista doble:
+|-----------|       |------------------|       |------------|       |------------------|       |------------|       |------------------|
+|fecha: 9/11|       |fecha:            |       |fecha: 10/11|       |fecha:            |       |fecha: 11/11|       |fecha:            |
+|cant: 45633| ----> |cant:             | ----> |cant: 45633 | ----> |cant:             | ----> |cant: 45633 | ----> |cant:             |
+|cod:       | <---- |cod:a#14s/54d(aa4d| <---- |cod:        | <---- |cod:a#14s/54d(aa4d| <---- |cod:        | <---- |cod:a#14s/54d(aa4d|
+|dni:       |       |dni: 11222666     |       |dni:        |       |dni: 11222666     |       |dni:        |       |dni: 11222666     |
+|-----------|       |------------------|       |------------|       |------------------|       |------------|       |------------------|
+
+## Ejercicio 2
+Se tiene una lista circular de entrada donde cada nodo contiene como dato un
+valor entero que representa un código binario. Se debe cargar en una nueva
+lista simple aquellos nodos que no cumplen con el siguiente patrón: 
+
+(10) * N, siendo N cualquier número natural.
+
+*Ejemplo:* N = 3, valor 101010.
+
+Se pide:
+1. Para controlar el cumplimiento del patrón, realizar una función recursiva
+que retorne un valor lógico.
+2. Mostrar cómo quedó la lista circular con los nodos que cumplen el patrón.
