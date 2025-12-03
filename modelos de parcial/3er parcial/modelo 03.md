@@ -56,47 +56,58 @@ accion ejercicio(prim: puntero a Articulo) es
     
     total: entero
     p: puntero a Articulo
-    prim_q, a, q: puntero a Nodo
+    prim_q, ant, act, nue: puntero a Nodo
   proceso
     abrir e/ (ventas); leer(ventas, ven)
     total := 0
     
     prim_q := nil
-    
+  
     mientras no fda(ventas) hacer
       p := prim
       mientras (p <> nil) y (*p.cod_art <> ven.cod_art) hacer
         p := *p.prox
       fin_mientras
-      
+    
       si (p = nil) entonces
-        escribir("Error: no se encontró información del producto vendido.")
-      contrario
-        a := nil
-        q := prim_q
-        
-        mientras (q <> nil) y (*q.cod_art < vent.cod_art) hacer
-          a := q
-          q := *q.prox
+          escribir("Error: no se encontró información del producto.")
+      sino
+        ant := nil
+        act := prim_q
+    
+        mientras (act <> nil) y (*act.cod_art < ven.cod_art) hacer
+            ant := act
+            act := *act.prox
         fin_mientras
-        
-        si (a = nil) entonces
-          nuevo(q)
-          *q.prox := prim_q
-          prim_q := q
+    
+        // caso donde el nodo ya existe
+        si (act <> nil) y (*act.cod_art = ven.cod_art) entonces
+          *act.ventas := *act.ventas + 1
         contrario
-          si (q = nil) entonces
-            nuevo(q)
-            *q.
-          contrario
+          nuevo(nue)
+          *nue.cod_art := ven.cod_art
+          *nue.fabricante := *p.fabricante 
+          *nue.modelo := *p.modelo     
+          *nue.ventas := 1 
           
+          // apunta al actual, sea este un nodo o valor nil
+          // cubre casos al principio (ant = nil), medio y fin (act = nil)
+          *nue.prox := act
+    
+          si (ant = nil) entonces
+            prim_q := q
+          contrario
+            *ant.prox := q
           fin_si
         fin_si
-        
+            
+        total := total + (ven.precio - (ven.precio * *p.com/100))
       fin_si
       
+      leer(ventas, ven)
     fin_mientras
-  
+    
+    escribir("El total recaudado por la empresa por las ventas fue de $", total)
 fin_accion
 ```
 
