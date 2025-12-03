@@ -3,15 +3,17 @@ Durante la Feria del Libro se relevó información sobre las editoriales partici
 libros que presentan. Los datos fueron almacenados en dos secuencias de caracteres, las cuales
 deben ser procesadas para obtener distintos informes.
 
-### Datos de Entrada
-A. **Secuencia de Editoriales:**
+**Datos de Entrada**
+A. Secuencia de Editoriales:**
+
 Cada editorial está representada de la siguiente manera:
 - Nombre de la editorial (cantidad indeterminada de caracteres, finaliza con '&')
 - Provincia (2 caracteres que representan un número del '01' al '23')
 
 *Ejemplo:* Planeta&01Sudamericana&03...
 
-B. **Secuencia de Libros:**
+B. Secuencia de Libros:
+
 Por cada editorial hay una cantidad indeterminada de libros, separados por el carácter '@'.
 Cada libro contiene los siguientes campos:
 - Tema (1 carácter): L = Literatura / C = Ciencia / A = Autoayuda y desarrollo personal / I = Infantiles

@@ -1,4 +1,4 @@
-## Ejercicio 1
+## Ejercicio N° 1
 Una empresa que tiene un negocio de e-commerce quiere conocer la opinión de
 los clientes en cuanto a su experiencia en la página a la hora de realizar
 consultas sobre los servicios que ofrece. Se registraron en una lista simple
@@ -14,7 +14,7 @@ Los datos de los distintos compradores están registrados en un archivo indexado
 | Usuario | Apellido y Nombre | DNI | Dirección | Correo | Categoría ("Sin categoría", "Silver", "Gold") |
 |---------|-------------------|-----|-----------|--------|-----------------------------------------------|
 
-Se posee ad*emás una lista circular simple con códigos de cupones de descuento
+Se posee además una lista circular simple con códigos de cupones de descuento
 disponibles (cod_descuento, porcentaje_descuento).
 
 Se le solicita:
@@ -37,7 +37,21 @@ la opinión (fecha_opinión) más reciente.
 con el mayor promedio de calificación y los 5 usuarios con el menor promedio de
 calificación.
 
-## Ejercicio 2
+<details>
+<summary>Solución</summary>
+
+```
+accion ejercicio() es
+  ambiente
+    
+  proceso
+
+fin_accion
+```
+
+</details>
+
+## Ejercicio N° 2
 Dada una lista doblemente enlazada con la información de las compras realizadas
 por los clientes, donde en cada compra se indica el método de pago (efectivo,
 tarjeta de crédito, Mercado Pago, Modo, etc), con el siguiente formato:
@@ -50,14 +64,102 @@ Se le solicita:
 utilizando una función recursiva. La información de las tarjetas de crédito
 se encuentra dentro de un arreglo de 16 posiciones en cada nodo (en el campo
 nro_tarjeta), debiendo realizarse los siguientes pasos:
-
-a) Comenzar a procesar desde el último dígito hacia el primero.
-b) Doblar (duplicar) los dígitos en posiciones impares. Si el resultado de la
+- Comenzar a procesar desde el último dígito hacia el primero.
+- Doblar (duplicar) los dígitos en posiciones impares. Si el resultado de la
 operación es mayor que 9, se deben sumar los dígitos del número (por ejemplo,
 si el resultado es 14, entonces 1 + 4 = 5).
-c) Sumar todos los dígitos obtenidos.
-d) Verificar si la suma de los dígitos es divisible por 10. En caso de serlo,
+- Sumar todos los dígitos obtenidos.
+- Verificar si la suma de los dígitos es divisible por 10. En caso de serlo,
 el número de tarjeta es válido.
+
 2. Eliminar de la lista de entrada aquellas compras que se hayan realizado con
 un número de tarjeta inválido, sin modificar los nodos con números de tarjeta
 válidos.
+
+Caso base:
+  verdadero, si pos = 0 && num MOD 10 = 0
+  falso, si pos = 0 && num MOD 10 <> 0
+Caso recursivo:
+  es_valida(tarj, pos - 1, sum + tarj[pos]), si (pos > 1) && ((pos MOD 2) = 0)
+  es_valida(tarj, pos - 1, sum + suma_doble), si (pos > 1) && ((pos MOD 2) <> 0)
+  
+<details>
+<summary>Solución</summary>
+
+```
+accion ejercicio(prim, ult: puntero Nodo) es
+  ambiente
+    Nodo = registro
+      id_com: N(8)
+      fecha: N(8)
+      método: ("TC", "TD", "EF")
+      nro_tarj: arreglo [1..16] de N(1)
+      monto: real
+      ant, prox: puntero a Nodo
+    fin_registro
+    
+    aux, a, p: puntero a Nodo
+    
+    funcion es_valida(tarj: arreglo [1..6] de N(1), pos: entero,
+      total: entero): logico es
+      ambiente
+        dig: entero
+      proceso
+        si (pos = 0) entonces
+          si ((total MOD 10) = 0) entonces
+            es_valida := verdadero
+          contrario
+            es_valida := falso
+          fin_si
+        contrario 
+          si ((pos MOD 2) = 0) entonces
+            es_valida := es_valida(tarj, pos - 1, total + tarj[pos])
+          contrario
+            dig := (total MOD 10) * 2
+            
+            si (dig > 9) entonces
+              mientras (dig <> 0) hacer
+                total := total + (dig MOD 10)
+                dig := dig DIV 10
+              fin_mientras
+              es_valida := es_valida(tarj, pos - 1, total)
+            contrario
+              es_valida := es_valida(tarj, pos - 1, total + dig)
+            fin_si
+          fin_si
+        fin_si
+    fin_funcion
+  proceso
+    a := nil
+    p := prim
+    
+    mientras (p <> nil) hacer
+      si (*p.metodo = "TC") && (es_valida(*p.nro_tarj, 16, 0)) entonces
+        a := p  
+        p := *p.prox
+      contrario
+        si (a = nil) entonces
+          aux := p
+          p := *p.prox
+          *p.ant := nil
+          prim := p
+          disponer(aux)
+        contrario
+          si (*p.prox = nil) entonces
+            *a.prox := nil
+            ult := a
+            disponer(p)
+          contrario
+            aux := p
+            p := *p.prox
+            *p.ant := a
+            *a.prox := p
+            disponer(aux)
+          fin_si
+        fin_si
+      fin_si
+    fin_mientras
+fin_accion
+```
+
+</details>
